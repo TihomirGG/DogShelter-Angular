@@ -3,7 +3,16 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebaseConfig: {
+    apiKey: 'AIzaSyBk_SiSHP7COkwbEwihTNDgIfgZquIkEc0',
+    authDomain: 'dog-shelter-aae8c.firebaseapp.com',
+    databaseURL: 'https://dog-shelter-aae8c.firebaseio.com',
+    projectId: 'dog-shelter-aae8c',
+    storageBucket: 'dog-shelter-aae8c.appspot.com',
+    messagingSenderId: '40969031012',
+    appId: '1:40969031012:web:3e16afe4d8b3ae74903e71',
+  },
 };
 
 /*
