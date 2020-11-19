@@ -1,0 +1,52 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+nav {
+  display: flex;
+  justify-content: flex-end;
+  align-items:center;
+  border: solid black 2px;
+  border-radius: 4px;
+  height: 55px;
+}
+
+.nav-list {
+  margin: 0;
+  display: inline-flex;
+  width:30%;
+  justify-content: space-around;
+}
+
+li {
+  display: inline-flex;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+  border: solid black 2px;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+a:hover {
+  color: green;
+}
+
+.logo {
+    margin-left: 10px;
+  width: 50px;
+  height: 75px;
+  position: absolute;
+  align-self: flex-start;
+  left: 0;
+}
+img {
+  width: 100%;
+  object-fit: cover;
+}
