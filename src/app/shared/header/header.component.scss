@@ -8,8 +8,16 @@ body {
   margin: 0;
 }
 
-.navbar {
+header {
+  display: block;
+  box-shadow: 6px 0px 16px 10px rgb(31, 30, 29);
   position: fixed;
+  z-index: 2000;
+  width: 100%;
+}
+
+
+.navbar {
   font-family: 'Roboto', sans-serif;
   display: flex;
   justify-content: space-between;

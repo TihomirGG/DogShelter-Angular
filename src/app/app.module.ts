@@ -15,9 +15,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCarouselModule } from '@ngbmodule/material-carousel';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { LoginComponent } from './core/login/login.component';
+import { RegisterComponent } from './core/register/register.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, FooterComponent, HomeComponent],
+  declarations: [AppComponent, HeaderComponent, FooterComponent, HomeComponent, LoginComponent,RegisterComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
