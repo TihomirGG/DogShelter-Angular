@@ -1,0 +1,33 @@
+<div class="container">
+  <h1>Create Post</h1>
+  <form mat [formGroup]="createForm">
+    <div class="create-post-container">
+      <mat-form-field>
+        <input matInput placeholder="Title" formControlName="title" />
+        <mat-hint *ngIf="createForm.get('title')"></mat-hint>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Region" formControlName="region" />
+        <mat-hint *ngIf="createForm.get('region')"></mat-hint>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="City" formControlName="city">
+        <mat-hint *ngIf="createForm.get('city')"></mat-hint>
+    </mat-form-field>
+      <mat-form-field>
+        <textarea
+          matInput
+          placeholder="Description"
+          formControlName="description"
+          cdkAutosizeMinRows="5"
+          cdkAutosizeMaxCols="10"
+        ></textarea>
+      </mat-form-field>
+      <mat-form-field>
+        <input type="text" matInput placeholder="Phone Number" formControlName="phone">
+        <mat-hint *ngIf="createForm.get('phone')"></mat-hint>
+    </mat-form-field>
+      <button mat-flat-button type="submit" color="primary">Create</button>
+    </div>
+  </form>
+</div>

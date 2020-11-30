@@ -1,0 +1,45 @@
+<div class="container">
+  <h1>Register</h1>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div class="register-container">
+      <mat-form-field>
+        <input matInput placeholder="First Name" formControlName="firstName" />
+        <mat-hint *ngIf="registerForm.get('firstName')"></mat-hint>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Last Name" formControlName="lastName" />
+        <mat-hint *ngIf="registerForm.get('lastName')"></mat-hint>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Email" formControlName="email" />
+        <mat-hint *ngIf="registerForm.get('email')"></mat-hint>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          type="password"
+          matInput
+          placeholder="Password"
+          formControlName="password"
+        />
+        <mat-hint *ngIf="registerForm.get('password')"></mat-hint>
+      </mat-form-field>
+
+
+      <mat-form-field>
+        <input
+        matInput
+        type="password"
+        placeholder="Repeat Password"
+        formControlName="repeatPassword"
+      />
+      <mat-hint *ngIf="registerForm.get('repeatPassword')?.errors?.required"></mat-hint>
+      </mat-form-field>
+     
+
+      <button mat-flat-button color="primary" class="submit-btn"  type="submit" [disabled]="registerForm.invalid">Register</button>
+    </div>
+  </form>
+</div>
