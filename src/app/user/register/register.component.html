@@ -35,7 +35,7 @@
         placeholder="Repeat Password"
         formControlName="repeatPassword"
       />
-      <mat-hint *ngIf="registerForm.get('repeatPassword')?.errors?.required"></mat-hint>
+      <mat-hint *ngIf="registerForm.get('repeatPassword')?.errors?.required">Repeat Password field is required!</mat-hint>
       </mat-form-field>
      
 

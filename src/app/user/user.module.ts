@@ -24,4 +24,6 @@ import { AngularFirestoreModule ,AngularFirestore} from '@angular/fire/firestore
   exports: [LoginComponent, RegisterComponent],
   providers: [UserService],
 })
-export class UserModule {}
+export class UserModule {
+  
+}

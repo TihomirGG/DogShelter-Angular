@@ -51,9 +51,6 @@ export class UserService {
     
     return promiseSnapshot;
     
-    
-     
-    
     // .then((x) => {
     //   console.log(x.user?.uid);
     //   const temp  = x.user?.uid;
@@ -70,5 +67,10 @@ export class UserService {
     this.fireAuth.signOut().then((_) => {
       console.log(_);
     });
+  }
+
+  async currentUserId() : Promise<string |undefined> {
+       const user = await this.fireAuth.currentUser;
+       return Promise.resolve(user?.uid);
   }
 }

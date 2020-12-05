@@ -1,3 +1,20 @@
-<div class="container">
-    <form ></form>
+<div class="search-container">
+    <form class="search-form">
+        
+        <mat-form-field>
+            <input matInput type="search" placeholder="search">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>City</mat-label>
+             <mat-select matNativeControl [(value)]="selectedOption">
+                 <mat-option value="--">--</mat-option>
+                <mat-option value="Sofia" >Sofia</mat-option>
+                <mat-option value="Plovdiv">Plovdiv</mat-option>
+                <mat-option value="Varna">Varna</mat-option>
+                <mat-option value="Burgas">Burgas</mat-option>
+                <mat-option value="Ruse">Ruse</mat-option>
+             </mat-select>
+        </mat-form-field>
+        <button mat-flat-button color="primary">Search</button>
+    </form>
 </div>

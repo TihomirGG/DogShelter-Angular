@@ -1,6 +1,6 @@
 <div class="container">
   <h1>Create Post</h1>
-  <form mat [formGroup]="createForm">
+  <form [formGroup]="createForm" (ngSubmit)="onSubmit()">
     <div class="create-post-container">
       <mat-form-field>
         <input matInput placeholder="Title" formControlName="title" />
@@ -11,9 +11,11 @@
         <mat-hint *ngIf="createForm.get('region')"></mat-hint>
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="City" formControlName="city">
-        <mat-hint *ngIf="createForm.get('city')"></mat-hint>
-    </mat-form-field>
+        <input matInput placeholder="City" formControlName="city" />
+        <mat-hint *ngIf="createForm.get('city')?.errors?.required"
+          >This fild is required</mat-hint
+        >
+      </mat-form-field>
       <mat-form-field>
         <textarea
           matInput
@@ -24,10 +26,39 @@
         ></textarea>
       </mat-form-field>
       <mat-form-field>
-        <input type="text" matInput placeholder="Phone Number" formControlName="phone">
-        <mat-hint *ngIf="createForm.get('phone')"></mat-hint>
-    </mat-form-field>
-      <button mat-flat-button type="submit" color="primary">Create</button>
+        <input
+          type="text"
+          matInput
+          placeholder="Phone Number"
+          formControlName="phone"
+        />
+        <mat-hint *ngIf="createForm.get('phone')?.errors?.pattern"
+          >Dont match the pattern</mat-hint
+        >
+      </mat-form-field>
+      <div>
+        <label for="image">Image: </label>
+        <input
+          type="file"
+          placeholder="Image Upload"
+          id="image"
+          formControlName="image"
+          (change)="onFileChange($event)"
+        />
+        <div
+          *ngIf="
+            createForm.get('image')?.touched && createForm.get('image')?.invalid
+          "
+          class="alert alert-danger"
+        >
+          <div *ngIf="createForm.get('image')?.errors?.required">
+            File is required.
+          </div>
+        </div>
+      </div>
+      <button mat-flat-button color="primary" type="submit" [disabled]="createForm.invalid">
+        Create
+      </button>
     </div>
   </form>
 </div>

@@ -8,7 +8,7 @@
       </mat-form-field>
       <mat-form-field>
         <input matInput type="password" placeholder="Password" formControlName="password" />
-        <mat-hint *ngIf="loginForm.get('password')"></mat-hint>
+        <mat-hint *ngIf="loginForm.get('password')?.errors?.required">Password field is required!</mat-hint>
       </mat-form-field>
 
       <button mat-flat-button color="primary" [disabled]="loginForm.invalid">Submit</button>

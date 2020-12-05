@@ -1,0 +1,35 @@
+<div class="loading" *ngIf="isLoading">
+  <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+</div>
+
+<div class="container" *ngIf="!isLoading">
+  
+  <div class="search">
+    <app-filter></app-filter>
+  </div>
+  <div class="posts" >
+    <mat-card class="card" *ngFor="let post of posts">
+      <div class="header-container">
+        <mat-card-header color="Primary">
+          <mat-card-title> {{post.title}} </mat-card-title>
+          <mat-card-subtitle> {{post.region}} </mat-card-subtitle>
+        </mat-card-header>
+        <img
+          mat-card-md-image
+          src={{post.image}}
+        />
+      </div>
+      <div class="content-container">
+        <p>{{post.description}}</p>
+      </div>
+      <button mat-flat-button color="primary"><a routerLink="/posts/details/{{post.id}}">View</a></button>
+    </mat-card>
+  </div>
+  <!-- <mat-paginator
+    [length]="5"
+    [pageSize]="12"
+    [pageSizeOptions]="[12]"
+  >
+  </mat-paginator> -->
+</div>
+ <!-- (page)="pageEvent = $event" -->

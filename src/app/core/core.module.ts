@@ -10,9 +10,24 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { CoreRoutingModule } from './core-routing.module';
 import { PostService } from './post.service';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { PostsComponent } from './posts/posts.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatSelectModule } from '@angular/material/select';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { DetailComponent } from './detail/detail.component';
+import { EditComponent } from './edit/edit.component';
 
 @NgModule({
-  declarations: [HomeComponent, FilterComponent, CreateComponent],
+  declarations: [
+    HomeComponent,
+    FilterComponent,
+    CreateComponent,
+    PostsComponent,
+    DetailComponent,
+    EditComponent,
+  ],
   imports: [
     CommonModule,
     CoreRoutingModule,
@@ -21,8 +36,13 @@ import { PostService } from './post.service';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatToolbarModule,
+    MatCardModule,
+    MatSelectModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule,
   ],
-  exports: [HomeComponent, CreateComponent],
-  providers: [PostService],
+  exports: [HomeComponent, CreateComponent, CreateComponent, PostsComponent],
+  providers: [PostService, UserService],
 })
 export class CoreModule {}

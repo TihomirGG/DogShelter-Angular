@@ -18,6 +18,10 @@ import { SharedModule } from './shared/shared.module';
 import { MatInputModule } from '@angular/material/input';
 import { StoreModule } from '@ngrx/store';
 import { storeData } from '../app/store/user-store/user.reducer';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { MatCardModule } from '@angular/material/card';
+import { MatSelectModule } from '@angular/material/select';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,12 +30,16 @@ import { storeData } from '../app/store/user-store/user.reducer';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
+    AngularFireStorageModule,
     StoreModule.forRoot(storeData),
     UserModule,
     BrowserAnimationsModule,
     MatButtonModule,
     MatInputModule,
     MatToolbarModule,
+    MatCardModule,
+    MatSelectModule,
+    MatPaginatorModule,
     CoreModule,
     SharedModule,
     HammerModule,

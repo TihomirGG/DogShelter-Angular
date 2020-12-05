@@ -1,0 +1,19 @@
+<div class="loading" *ngIf="isLoading">
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+  </div>
+<div class="container" *ngIf="!isLoading">
+<section class="post-container">
+    <div class="image-container"><img src={{post?.image}} alt=""></div>
+    <div class="info-container">
+        <p>phone: {{post?.phone}}</p>
+        <p>city: {{post?.city}}</p>
+        <p>region: {{post?.region}}</p>
+    </div>
+    <button *ngIf="currentUserId === post?.uid" mat-flat-button color="accent" routerLink="/posts/edit/{{post?.id}}">Edit</button>
+    <button *ngIf="currentUserId === post?.uid" mat-flat-button color="warn" routerLink="/posts/delete/{{post?.id}}" (click)="deletePost()">Delete</button>
+    <div class="description-container">
+        <p>{{post?.description}}</p>
+    </div>
+</section>
+{{post | json}}
+</div>
