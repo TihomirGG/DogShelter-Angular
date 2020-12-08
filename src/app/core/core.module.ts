@@ -18,6 +18,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DetailComponent } from './detail/detail.component';
 import { EditComponent } from './edit/edit.component';
+import { AboutComponent } from './about/about.component';
+import { NotAuthGuard } from '../user/not-auth.service';
+import { AuthGuard } from '../user/auth.service';
 
 @NgModule({
   declarations: [
@@ -27,6 +30,7 @@ import { EditComponent } from './edit/edit.component';
     PostsComponent,
     DetailComponent,
     EditComponent,
+    AboutComponent,
   ],
   imports: [
     CommonModule,
@@ -43,6 +47,6 @@ import { EditComponent } from './edit/edit.component';
     MatProgressSpinnerModule,
   ],
   exports: [HomeComponent, CreateComponent, CreateComponent, PostsComponent],
-  providers: [PostService, UserService],
+  providers: [PostService,NotAuthGuard,AuthGuard],
 })
 export class CoreModule {}

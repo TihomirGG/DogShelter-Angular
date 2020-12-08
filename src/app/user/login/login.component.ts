@@ -29,11 +29,12 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onSubmit(): void {
-    this.userService.login(
+  async onSubmit() {
+    await this.userService.login(
       this.loginForm.get('email')?.value,
       this.loginForm.get('password')?.value
-    );
-   
+    )
+  
+      this.router.navigateByUrl('/posts/all');
   }
 }

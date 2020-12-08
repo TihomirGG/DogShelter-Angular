@@ -3,11 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
 import { IPost } from '../shared/interfaces/posts';
-import User from 'firebase/index';
-import { promise } from 'protractor';
 @Injectable()
 export class PostService {
   constructor(
@@ -78,7 +74,7 @@ export class PostService {
     return Promise.resolve(post);
   }
 
-   deletePost(id : string){
+   deletePost(id : string) {
        this.fireStore.collection('posts').doc(id).delete().then(x => {
          this.router.navigateByUrl('/posts/all');
        })

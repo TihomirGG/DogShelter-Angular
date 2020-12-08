@@ -3,33 +3,26 @@
 </div>
 
 <div class="container" *ngIf="!isLoading">
-  
   <div class="search">
     <app-filter></app-filter>
   </div>
-  <div class="posts" >
-    <mat-card class="card" *ngFor="let post of posts">
+  <div class="posts">
+    <mat-card class="card" *ngFor="let post of pageSlice">
       <div class="header-container">
         <mat-card-header color="Primary">
-          <mat-card-title> {{post.title}} </mat-card-title>
-          <mat-card-subtitle> {{post.region}} </mat-card-subtitle>
+          <mat-card-title> {{ post.title }} </mat-card-title>
+          <mat-card-subtitle> {{ post.region }} </mat-card-subtitle>
         </mat-card-header>
-        <img
-          mat-card-md-image
-          src={{post.image}}
-        />
+        <img mat-card-md-image src="{{ post.image }}" />
       </div>
       <div class="content-container">
-        <p>{{post.description}}</p>
+        <p class="description">{{ post.description }}</p>
+        <button mat-flat-button color="primary" class="view-btn">
+          <a routerLink="/posts/details/{{ post.id }}">View</a>
+        </button>
       </div>
-      <button mat-flat-button color="primary"><a routerLink="/posts/details/{{post.id}}">View</a></button>
     </mat-card>
   </div>
-  <!-- <mat-paginator
-    [length]="5"
-    [pageSize]="12"
-    [pageSizeOptions]="[12]"
-  >
-  </mat-paginator> -->
+  <mat-paginator [length]="length" [pageSize]="12" (page)="onPageEvent($event)" color="primary"> </mat-paginator>
 </div>
- <!-- (page)="pageEvent = $event" -->
+<!-- (page)="pageEvent = $event" -->

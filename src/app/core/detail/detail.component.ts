@@ -25,19 +25,13 @@ export class DetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userService.currentUserId().then((x) => {
-      this.currentUserId = x;
-    });
+    console.log(this.userService.userId);
+    this.currentUserId = this.userService.userId;
     this.postId = this.router.snapshot.params.id;
     this.postService.getById(this.postId).then((x) => {
       this.isLoading = false;
       this.post = x;
     });
-
-    setTimeout(() => {
-      console.log(this.currentUserId);
-      console.log(this.post?.uid);
-    }, 3000);
   }
 
   edit() {}

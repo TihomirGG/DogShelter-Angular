@@ -8,10 +8,16 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { UserService } from './user.service';
-import { AngularFirestoreModule ,AngularFirestore} from '@angular/fire/firestore';
+import {
+  AngularFirestoreModule,
+  AngularFirestore,
+} from '@angular/fire/firestore';
+import { ProfileComponent } from './profile/profile.component';
+import { AuthGuard } from './auth.service';
+import { NotAuthGuard } from './not-auth.service';
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent],
+  declarations: [LoginComponent, RegisterComponent, ProfileComponent],
   imports: [
     CommonModule,
     UserRoutingModule,
@@ -22,8 +28,6 @@ import { AngularFirestoreModule ,AngularFirestore} from '@angular/fire/firestore
     MatButtonModule,
   ],
   exports: [LoginComponent, RegisterComponent],
-  providers: [UserService],
+  providers: [UserService, AuthGuard, NotAuthGuard],
 })
-export class UserModule {
-  
-}
+export class UserModule {}
