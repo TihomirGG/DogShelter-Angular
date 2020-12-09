@@ -26,7 +26,7 @@
         <a routerLink="/user/register">Register</a>
       </li>
       <li >
-        <a routerLink="/user/login" (click)="logout()">Logout</a>
+        <a routerLink="/user/login" *ngIf="isLogged" (click)="logout()">Logout</a>
       </li>
       
       

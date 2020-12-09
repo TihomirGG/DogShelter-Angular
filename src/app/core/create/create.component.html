@@ -4,26 +4,41 @@
     <div class="create-post-container">
       <mat-form-field>
         <input matInput placeholder="Title" formControlName="title" />
-        <mat-hint *ngIf="createForm.get('title')"></mat-hint>
+        <mat-hint *ngIf="createForm.get('title')?.errors?.required"
+          >This field is required</mat-hint
+        >
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Region" formControlName="region" />
-        <mat-hint *ngIf="createForm.get('region')"></mat-hint>
+        <mat-label>Region</mat-label>
+  <mat-select formControlName="region" (change)="changeCity($event)">
+    <mat-option value="Sofia">Sofia</mat-option>
+    <mat-option value="Plovdiv">Plovdiv</mat-option>
+    <mat-option value="Varna">Varna</mat-option>
+    <mat-option value="Ruse">Ruse</mat-option>
+    <mat-option value="Burgas">Burgas</mat-option>
+    <mat-option value="Vidin">Vidin</mat-option>
+  </mat-select>
+  <mat-hint *ngIf="createForm.get('region')?.errors?.required"
+  >This field is required</mat-hint
+>
       </mat-form-field>
       <mat-form-field>
         <input matInput placeholder="City" formControlName="city" />
         <mat-hint *ngIf="createForm.get('city')?.errors?.required"
-          >This fild is required</mat-hint
+          >This field is required</mat-hint
         >
       </mat-form-field>
       <mat-form-field>
-        <textarea
+        <textarea cols="10" rows="5"
           matInput
           placeholder="Description"
           formControlName="description"
           cdkAutosizeMinRows="5"
           cdkAutosizeMaxCols="10"
         ></textarea>
+        <mat-hint *ngIf="createForm.get('city')?.errors?.required"
+          >This field is required</mat-hint
+        >
       </mat-form-field>
       <mat-form-field>
         <input
@@ -33,18 +48,21 @@
           formControlName="phone"
         />
         <mat-hint *ngIf="createForm.get('phone')?.errors?.pattern"
-          >Dont match the pattern</mat-hint
+          >Wrong pattern</mat-hint
         >
       </mat-form-field>
-      <div>
-        <label for="image">Image: </label>
-        <input
-          type="file"
-          placeholder="Image Upload"
-          id="image"
-          formControlName="image"
-          (change)="onFileChange($event)"
-        />
+      <div class="img-div">
+        <label for="image" class="fileContainer"
+          >Choose image
+          <input class="upload-img"
+            type="file"
+            placeholder="Image Upload"
+            id="image"
+            formControlName="image"
+            (change)="onFileChange($event)"
+          />
+        </label>
+
         <div
           *ngIf="
             createForm.get('image')?.touched && createForm.get('image')?.invalid
@@ -52,11 +70,16 @@
           class="alert alert-danger"
         >
           <div *ngIf="createForm.get('image')?.errors?.required">
-            File is required.
+            Image is required.
           </div>
         </div>
       </div>
-      <button mat-flat-button color="primary" type="submit" [disabled]="createForm.invalid">
+      <button
+        mat-flat-button
+        color="primary"
+        type="submit"
+        [disabled]="createForm.invalid"
+      >
         Create
       </button>
     </div>

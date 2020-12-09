@@ -1,3 +1,96 @@
-<div class="container">
-    <p>edit works!</p>
+<div class="loading" *ngIf="isLoading">
+  <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+</div>
+
+<div class="container" *ngIf="!isLoading">
+  <h1>Edit Post</h1>
+  <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+    <div class="create-post-container">
+      <mat-form-field>
+        <input matInput placeholder="Title" formControlName="title" />
+        <mat-hint *ngIf="editForm.get('title')?.errors?.required"
+          >This field is required</mat-hint
+        >
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Region</mat-label>
+        <mat-select formControlName="region" (change)="changeCity($event)">
+          <mat-option value="Sofia">Sofia</mat-option>
+          <mat-option value="Plovdiv">Plovdiv</mat-option>
+          <mat-option value="Varna">Varna</mat-option>
+          <mat-option value="Ruse">Ruse</mat-option>
+          <mat-option value="Burgas">Burgas</mat-option>
+          <mat-option value="Vidin">Vidin</mat-option>
+        </mat-select>
+        <mat-hint *ngIf="editForm.get('region')?.errors?.required"
+          >This field is required</mat-hint
+        >
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="City" formControlName="city" />
+        <mat-hint *ngIf="editForm.get('city')?.errors?.required"
+          >This field is required</mat-hint
+        >
+      </mat-form-field>
+      <mat-form-field>
+        <textarea
+          cols="10"
+          rows="5"
+          matInput
+          placeholder="Description"
+          formControlName="description"
+          cdkAutosizeMinRows="5"
+          cdkAutosizeMaxCols="10"
+        >
+{{post.description}</textarea
+        >
+        <mat-hint *ngIf="editForm.get('city')?.errors?.required"
+          >This field is required</mat-hint
+        >
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          type="text"
+          matInput
+          placeholder="Phone Number"
+          formControlName="phone"
+        />
+        <mat-hint *ngIf="editForm.get('phone')?.errors?.pattern"
+          >Wrong pattern</mat-hint
+        >
+      </mat-form-field>
+      <div class="img-div">
+        <label for="image" class="fileContainer"
+          >Choose image
+          <input
+            class="upload-img"
+            type="file"
+            placeholder="Image Upload"
+            id="image"
+            formControlName="image"
+            (change)="onFileChange($event)"
+          />
+        </label>
+
+        <div
+          *ngIf="
+            editForm.get('image')?.touched && editForm.get('image')?.invalid
+          "
+          class="alert alert-danger"
+        >
+          <div *ngIf="editForm.get('image')?.errors?.required">
+            Image is required.
+          </div>
+        </div>
+      </div>
+      <button
+        mat-flat-button
+        color="primary"
+        type="submit"
+        [disabled]="editForm.invalid"
+      >
+        Edit
+      </button>
+    </div>
+  </form>
 </div>

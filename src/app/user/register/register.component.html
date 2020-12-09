@@ -1,20 +1,23 @@
 <div class="container">
+  <div class="error-container" *ngIf="error">
+    {{error}}
+  </div>
   <h1>Register</h1>
   <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
     <div class="register-container">
       <mat-form-field>
         <input matInput placeholder="First Name" formControlName="firstName" />
-        <mat-hint *ngIf="registerForm.get('firstName')"></mat-hint>
+        <mat-hint *ngIf="registerForm.get('firstName')?.errors?.required">First name field is required!</mat-hint>
       </mat-form-field>
 
       <mat-form-field>
         <input matInput placeholder="Last Name" formControlName="lastName" />
-        <mat-hint *ngIf="registerForm.get('lastName')"></mat-hint>
+        <mat-hint *ngIf="registerForm.get('lastName')?.errors?.required">Last name field is required!</mat-hint>
       </mat-form-field>
 
       <mat-form-field>
         <input matInput placeholder="Email" formControlName="email" />
-        <mat-hint *ngIf="registerForm.get('email')"></mat-hint>
+        <mat-hint *ngIf="registerForm.get('email')?.errors?.required">Email field is required!</mat-hint>
       </mat-form-field>
 
       <mat-form-field>
@@ -24,7 +27,7 @@
           placeholder="Password"
           formControlName="password"
         />
-        <mat-hint *ngIf="registerForm.get('password')"></mat-hint>
+        <mat-hint *ngIf="registerForm.get('password')?.errors?.required">Password field is required!</mat-hint>
       </mat-form-field>
 
 

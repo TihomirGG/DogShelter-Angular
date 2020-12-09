@@ -18,20 +18,27 @@ export class PostService {
     description: string,
     phone: string,
     title: string,
+    city: string,
     file: File | null
   ) {
     const user = await this.fa.currentUser;
     const uid = user?.uid;
 
     this.fireStorage
-      .upload(`${title}`, file)
+      .upload(`${description}`, file)
       .then((x) => {
         return x.ref.getDownloadURL();
       })
       .then((downloadUrl) => {
-        this.fireStore
-          .collection('posts')
-          .add({ region, description, phone, title, uid, image: downloadUrl });
+        this.fireStore.collection('posts').add({
+          region,
+          description,
+          phone,
+          city,
+          title,
+          uid,
+          image: downloadUrl,
+        });
         this.router.navigateByUrl('/posts/all');
       });
   }
@@ -65,18 +72,60 @@ export class PostService {
       uid: undefined,
     };
     await docRef.ref.get().then((doc) => {
-      return post = {
+      return (post = {
         id: docRef.ref.id,
         ...doc.data(),
-      } as IPost;
-      
+      } as IPost);
     });
     return Promise.resolve(post);
   }
 
-   deletePost(id : string) {
-       this.fireStore.collection('posts').doc(id).delete().then(x => {
-         this.router.navigateByUrl('/posts/all');
-       })
-   }
+  deletePost(id: string) {
+    this.fireStore
+      .collection('posts')
+      .doc(id)
+      .delete()
+      .then((x) => {
+        this.router.navigateByUrl('/posts/all');
+      });
+  }
+
+  updatePost(
+    id: string,
+    title: string,
+    city: string,
+    region: string,
+    phone: string,
+    description: string,
+    image: File | undefined
+  ) {
+    console.log(id);
+    if (image === undefined) {
+      console.log(id);
+      this.fireStore
+        .collection('posts')
+        .doc(id)
+        .update({ title, city, region, phone, description })
+        .then((_) => {
+          this.router.navigateByUrl(`/posts/details/${id}`);
+        });
+    } else {
+      this.fireStorage
+        .upload(`${description}`, image)
+        .then((x) => {
+          return x.ref.getDownloadURL();
+        })
+        .then((downloadUrl) => {
+          this.fireStore.collection('posts').doc(id).update({
+            region,
+            description,
+            city,
+            phone,
+            title,
+            image: downloadUrl,
+          });
+          this.router.navigateByUrl(`/posts/details/${id}`);
+        });
+    }
+  }
 }

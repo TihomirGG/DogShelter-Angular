@@ -15,7 +15,7 @@ import { UserService } from '../user.service';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-
+  error: String | undefined;
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
@@ -29,12 +29,25 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  async onSubmit() {
-    await this.userService.login(
-      this.loginForm.get('email')?.value,
-      this.loginForm.get('password')?.value
-    )
-  
-      this.router.navigateByUrl('/posts/all');
+  onSubmit() {
+    const temp = this.userService
+      .login(
+        this.loginForm.get('email')?.value,
+        this.loginForm.get('password')?.value
+      )
+      .then((x) => {
+        if (typeof x === typeof 'string') {
+          this.error = x as String;
+          this.hideError();
+          return;
+        }
+        this.router.navigateByUrl('/posts/all');
+      });
+  }
+
+  hideError() {
+    setTimeout(() => {
+      this.error = undefined;
+    }, 2500);
   }
 }

@@ -54,14 +54,21 @@ export class CreateComponent implements OnInit {
     }
   }
 
-  onSubmit() : void {
+  onSubmit(): void {
     const region = this.createForm.get('region')?.value;
     const description = this.createForm.get('description')?.value;
     const phone = this.createForm.get('phone')?.value;
     const title = this.createForm.get('title')?.value;
+    const city = this.createForm.get('city')?.value;
     console.log(
       `${region}    ${description}  ${phone}  ${title}  ${this.file}`
     );
-    this.postService.create(region, description, phone, title,this.file);
+    this.postService.create(region, description, phone, city, title, this.file);
+  }
+
+  changeCity(e: any) {
+    this.createForm.get('get')?.setValue(e.target.value, {
+      onlySelf: true,
+    });
   }
 }

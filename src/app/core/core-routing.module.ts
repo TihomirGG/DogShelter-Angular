@@ -24,7 +24,7 @@ const router: Routes = [
     path: 'posts/create',
     pathMatch: 'full',
     component: CreateComponent,
-    canActivate: [AuthGuard]
+    // canActivate: [AuthGuard]
   },
   {
     path: 'posts/details/:id',

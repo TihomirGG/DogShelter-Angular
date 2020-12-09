@@ -18,7 +18,10 @@ import { UserService } from '../user.service';
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
-  submitButton: HTMLButtonElement | null = document.querySelector('.submit-btn');
+  submitButton: HTMLButtonElement | null = document.querySelector(
+    '.submit-btn'
+  );
+  error: string | undefined;
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
@@ -51,14 +54,37 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(): void {
     this.submitButton?.disabled;
-    this.userService.register(
-      this.registerForm.get('email')?.value,
-      this.registerForm.get('password')?.value,
-      this.registerForm.get('firstName')?.value,
-      this.registerForm.get('lastName')?.value
-    );
-    this.router.navigateByUrl('/user/login');
+    const pass = this.registerForm.get('password')?.value;
+    const rePass = this.registerForm.get('repeatPassword')?.value;
+    if (pass !== rePass) {
+      this.error = 'Passwords dont match!';
+      this.errorHide();
+      return;
+    }
+
+    this.userService
+      .register(
+        this.registerForm.get('email')?.value,
+        this.registerForm.get('password')?.value,
+        this.registerForm.get('firstName')?.value,
+        this.registerForm.get('lastName')?.value
+      )
+      .then((x) => {
+        if (x === 'Email is aready taken!') {
+          this.error = 'Email is aready taken!';
+          this.errorHide();
+          return;
+        } else {
+          this.router.navigateByUrl('/user/login');
+        }
+      });
   }
 
   ngOnInit(): void {}
+
+  errorHide() {
+    setTimeout(() => {
+      this.error = undefined;
+    }, 2500);
+  }
 }
