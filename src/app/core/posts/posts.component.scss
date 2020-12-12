@@ -4,7 +4,8 @@
   margin: 0 auto;
 }
 app-filter {
-  flex-grow: 1;
+  align-self: center;
+  flex-wrap: wrap;
 }
 
 .loading {
@@ -70,4 +71,13 @@ app-filter {
 a {
   text-decoration: none;
   color: white;
+}
+
+.error-container {
+  position: absolute;
+  top: 74px;
+  z-index: 3;
+  padding: 20px 15px 20px 15px;
+  background-color: #ff0202ad;
+  border-radius: 15px;
 }

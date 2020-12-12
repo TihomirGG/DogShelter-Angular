@@ -1,13 +1,12 @@
 <div class="search-container">
-    <form class="search-form">
+    <form [formGroup]="searchForm" class="search-form" (ngSubmit)="onSubmit()">
         
         <mat-form-field>
-            <input matInput type="search" placeholder="search">
+            <input matInput type="search" placeholder="search" formControlName="search">
         </mat-form-field>
         <mat-form-field>
-            <mat-label>City</mat-label>
-             <mat-select matNativeControl [(value)]="selectedOption">
-                 <mat-option value="--">--</mat-option>
+            <mat-label>Region</mat-label>
+             <mat-select matNativeControl formControlName="region">
                 <mat-option value="Sofia" >Sofia</mat-option>
                 <mat-option value="Plovdiv">Plovdiv</mat-option>
                 <mat-option value="Varna">Varna</mat-option>

@@ -3,6 +3,9 @@
 </div>
 
 <div class="container" *ngIf="!isLoading">
+  <div class="error-container" *ngIf="error">
+    {{error}}
+  </div>
   <div class="search">
     <app-filter></app-filter>
   </div>

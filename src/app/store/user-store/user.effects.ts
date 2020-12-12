@@ -20,15 +20,15 @@ export class UserEffects {
       map((action: UserLoginAction) => action.payload),
       switchMap(payload => {
           return   this.userService.login(payload.email,payload.password).then(x => {
-              x.forEach(item => {
-                  const data = item.data();
-                  const firstName = data?.firstName as string;
-                  const lastName = data?.lastName as string;
-                  const email = data?.email as string;
-                  const isLogged = true;
-                  const newPayload = new UserLoginActionSuccess({firstName,lastName,email,isLogged})
-                  return newPayload;
-              })
+            //   x.forEach(item => {
+            //       const data = item.data();
+            //       const firstName = data?.firstName as string;
+            //       const lastName = data?.lastName as string;
+            //       const email = data?.email as string;
+            //       const isLogged = true;
+            //       const newPayload = new UserLoginActionSuccess({firstName,lastName,email,isLogged})
+            //       return newPayload;
+            //   })
           })
           
       }),

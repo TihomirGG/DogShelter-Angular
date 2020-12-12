@@ -1,17 +1,22 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Router } from '@angular/router';
 import { IPost } from '../shared/interfaces/posts';
+import { UserService } from '../user/user.service';
 @Injectable()
 export class PostService {
+  @Output() postEmmiter: EventEmitter<IPost[] | null>;
   constructor(
     private fireStore: AngularFirestore,
     private router: Router,
     private fa: AngularFireAuth,
-    private fireStorage: AngularFireStorage
-  ) {}
+    private fireStorage: AngularFireStorage,
+    private userService: UserService
+  ) {
+    this.postEmmiter = new EventEmitter();
+  }
 
   async create(
     region: string,
@@ -116,16 +121,85 @@ export class PostService {
           return x.ref.getDownloadURL();
         })
         .then((downloadUrl) => {
-          this.fireStore.collection('posts').doc(id).update({
-            region,
-            description,
-            city,
-            phone,
-            title,
-            image: downloadUrl,
-          });
-          this.router.navigateByUrl(`/posts/details/${id}`);
+          this.fireStore
+            .collection('posts')
+            .doc(id)
+            .update({
+              region,
+              description,
+              city,
+              phone,
+              title,
+              image: downloadUrl,
+            })
+            .then((_) => {
+              this.router.navigateByUrl(`/posts/details/${id}`);
+            });
         });
+    }
+  }
+
+  getUserPosts() {
+    const posts: IPost[] = [];
+    const userId = this.userService.userId;
+    return this.fireStore
+      .collection<IPost>('posts')
+      .ref.where('uid', '==', userId)
+      .get()
+      .then((x) => {
+        x.forEach((post) => {
+          posts.push({ id: post.id, ...post.data() });
+        });
+        return posts;
+      })
+      .catch((e) => console.error);
+  }
+
+  regionFilterPosts(title: string | null, region: string | null) {
+    const posts: IPost[] = [];
+    if (title && region === null) {
+      const query = this.fireStore
+        .collection<IPost>('posts')
+        .ref.where('title', '==', title);
+
+      query
+        .get()
+        .then((x) => {
+          x.forEach((c) => {
+            posts.push({ ...c.data() });
+          });
+          this.postEmmiter.emit(posts);
+        })
+        .catch(console.log);
+    } else if (region && title === null) {
+      const query = this.fireStore
+        .collection<IPost>('posts')
+        .ref.where('region', '==', region);
+
+      query
+        .get()
+        .then((x) => {
+          x.forEach((c) => {
+            posts.push({ ...c.data() });
+          });
+          this.postEmmiter.emit(posts);
+        })
+        .catch(console.log);
+    } else {
+      const query = this.fireStore
+        .collection<IPost>('posts')
+        .ref.where('region', '==', region)
+        .where('title', '==', title);
+
+      query
+        .get()
+        .then((x) => {
+          x.forEach((c) => {
+            posts.push({ ...c.data() });
+          });
+          this.postEmmiter.emit(posts);
+        })
+        .catch(console.log);
     }
   }
 }

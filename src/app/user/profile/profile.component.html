@@ -1,1 +1,47 @@
-<p>profile works!</p>
+
+
+<div class="loading" *ngIf="isLoading">
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+  </div>
+<div class="container" *ngIf="!isLoading">
+<div class="content-container">
+  <div class="user-credentials">
+    <div class="img-div">
+      <img class="image"
+        src="https://simg.nicepng.com/png/small/301-3012856_account-user-profile-avatar-comments-free-image-user.png"
+        alt=""
+      />
+    </div>
+    <div class="user-bio">
+      <p class="info-p">First Name: {{user!.firstName}}</p>
+      <p class="info-p">Last Name: {{user!.lastName}}</p>
+      <p class="info-p">Email: {{user!.email}}</p>
+    </div>
+    <div class="password-change">
+      <button mat-flat-button color="primary" routerLink="/user/changePassword">Change Password</button>
+    </div>
+  </div> 
+  <div class="posts" *ngIf="pageSlice.length > 0">
+    <mat-card  class="card" *ngFor="let post of pageSlice">
+        <div class="header-container">
+          <mat-card-header color="Primary">
+            <mat-card-title> {{ post.title }} </mat-card-title>
+            <mat-card-subtitle> {{ post.region }} </mat-card-subtitle>
+          </mat-card-header>
+          <img mat-card-md-image src="{{ post.image }}" />
+        </div>
+        <div class="content">
+          <p class="description">{{ post.description }}</p>
+          <button mat-flat-button color="primary" class="view-btn">
+            <a routerLink="/posts/details/{{ post.id }}">View</a>
+          </button>
+        </div>
+      </mat-card>
+      
+  </div>
+  <div class="no-posts" *ngIf="pageSlice.length == 0">
+    <h1>No posts...</h1>
+  </div>
+</div>
+  <mat-paginator [length]="length" [pageSize]="6" (page)="onPageEvent($event)" color="primary"> </mat-paginator>
+</div>

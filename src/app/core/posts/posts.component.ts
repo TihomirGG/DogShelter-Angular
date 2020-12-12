@@ -14,13 +14,25 @@ export class PostsComponent implements OnInit, OnDestroy {
   isLoading: Boolean;
   length: number;
   pageSlice: IPost[];
+  error: string | undefined;
 
   constructor(private postService: PostService) {
     this.posts = [];
     this.pageSlice = [];
     this.length = 0;
-    console.log(this.postService.getAll());
     this.isLoading = true;
+    postService.postEmmiter.subscribe((x: IPost[] | null) => {
+      if (x?.length) {
+        this.posts = x;
+        this.pageSlice =
+          this.posts.length <= 12 ? this.posts : this.posts.slice(0, 12);
+        this.length = this.posts.length;
+      }
+      else{
+        this.error = 'Didnt find anything!';
+        this.errorHide();
+      }
+    });
   }
 
   ngOnInit(): void {
@@ -43,5 +55,11 @@ export class PostsComponent implements OnInit, OnDestroy {
     }
 
     this.pageSlice = this.posts.slice(startIndex, endIndex);
+  }
+
+  errorHide(){
+    setTimeout(() => {
+      this.error = undefined
+    }, 2500);
   }
 }
