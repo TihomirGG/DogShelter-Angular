@@ -30,7 +30,7 @@ export class PostService {
     const uid = user?.uid;
 
     this.fireStorage
-      .upload(`${description}`, file)
+      .upload(`${title}`, file)
       .then((x) => {
         return x.ref.getDownloadURL();
       })
@@ -43,9 +43,11 @@ export class PostService {
           title,
           uid,
           image: downloadUrl,
-        });
-        this.router.navigateByUrl('/posts/all');
-      });
+        }).then(x => {
+          this.router.navigateByUrl('/posts/all');
+        }).catch(console.log);
+        
+      }).catch(console.log);
   }
 
   async getAll(): Promise<IPost[]> {
@@ -73,7 +75,7 @@ export class PostService {
       image: undefined,
       phone: undefined,
       region: undefined,
-      description: undefined,
+      description: '',
       uid: undefined,
     };
     await docRef.ref.get().then((doc) => {

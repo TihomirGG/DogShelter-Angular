@@ -75,7 +75,7 @@ export class RegisterComponent implements OnInit {
           this.errorHide();
           return;
         } else {
-          this.router.navigateByUrl('/user/login');
+          this.router.navigateByUrl('/posts/all');
         }
       });
   }

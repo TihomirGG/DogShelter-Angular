@@ -15,24 +15,13 @@ export class PostsComponent implements OnInit, OnDestroy {
   length: number;
   pageSlice: IPost[];
   error: string | undefined;
+  sub: any;
 
   constructor(private postService: PostService) {
     this.posts = [];
     this.pageSlice = [];
     this.length = 0;
     this.isLoading = true;
-    postService.postEmmiter.subscribe((x: IPost[] | null) => {
-      if (x?.length) {
-        this.posts = x;
-        this.pageSlice =
-          this.posts.length <= 12 ? this.posts : this.posts.slice(0, 12);
-        this.length = this.posts.length;
-      }
-      else{
-        this.error = 'Didnt find anything!';
-        this.errorHide();
-      }
-    });
   }
 
   ngOnInit(): void {
@@ -43,9 +32,22 @@ export class PostsComponent implements OnInit, OnDestroy {
       this.length = this.posts.length;
       this.isLoading = false;
     });
+    this.sub = this.postService.postEmmiter.subscribe((x: IPost[] | null) => {
+      if (x?.length) {
+        this.posts = x;
+        this.pageSlice =
+          this.posts.length <= 12 ? this.posts : this.posts.slice(0, 12);
+        this.length = this.posts.length;
+      } else {
+        this.error = 'Didnt find anything!';
+        this.errorHide();
+      }
+    });
   }
 
-  ngOnDestroy() {}
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
 
   onPageEvent(event: PageEvent) {
     const startIndex = event.pageIndex * event.pageSize;
@@ -57,9 +59,9 @@ export class PostsComponent implements OnInit, OnDestroy {
     this.pageSlice = this.posts.slice(startIndex, endIndex);
   }
 
-  errorHide(){
+  errorHide() {
     setTimeout(() => {
-      this.error = undefined
+      this.error = undefined;
     }, 2500);
   }
 }

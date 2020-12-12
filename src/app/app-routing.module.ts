@@ -7,7 +7,8 @@ import {
 import { Routes, RouterModule } from '@angular/router';
 import { AboutComponent } from './core/about/about.component';
 import { HomeComponent } from './core/home/home.component';
-import {NotAuthGuard} from './user/not-auth.service';
+import { NotFoundComponent } from './core/not-found/not-found.component';
+import { NotAuthGuard } from './user/not-auth.service';
 
 // const redirectLoggedInToPosts = () => redirectLoggedInTo('posts/all');
 // const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo('user/login');
@@ -16,15 +17,16 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
-    canActivate: [NotAuthGuard]
+    canActivate: [NotAuthGuard],
   },
   { path: 'about', pathMatch: 'full', component: AboutComponent },
   {
     path: '',
     component: HomeComponent,
     pathMatch: 'full',
-    canActivate: [NotAuthGuard]
+    canActivate: [NotAuthGuard],
   },
+  { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({

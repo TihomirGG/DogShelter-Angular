@@ -9,6 +9,7 @@ import { DetailComponent } from './detail/detail.component';
 import { EditComponent } from './edit/edit.component';
 import { PostsComponent } from './posts/posts.component';
 import {AuthGuard} from '../user/auth.service';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 // const redirectLoggedInToPosts = () => redirectLoggedInTo('posts/all');
 // const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo('user/login');
@@ -24,7 +25,7 @@ const router: Routes = [
     path: 'posts/create',
     pathMatch: 'full',
     component: CreateComponent,
-    // canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: 'posts/details/:id',
@@ -40,6 +41,7 @@ const router: Routes = [
     canActivate: [AuthGuard],
     
   },
+  
 ];
 
 export const CoreRoutingModule = RouterModule.forChild(router);

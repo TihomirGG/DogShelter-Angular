@@ -107,6 +107,7 @@ export class UserService {
 
   async updatePass(newP: string) {
     try {
+      
       const cred = (await this.fireAuth.credential.toPromise())?.credential;
       if (cred) {
         await (

@@ -7,7 +7,7 @@ import { RouterModule } from '@angular/router';
 import { UserService } from '../user/user.service';
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent],
+  declarations: [HeaderComponent, FooterComponent, ],
   imports: [CommonModule, RouterModule, MatToolbarModule],
   exports: [HeaderComponent, FooterComponent],
   providers: [UserService],

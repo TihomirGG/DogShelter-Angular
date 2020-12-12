@@ -15,29 +15,26 @@ import { UserService } from 'src/app/user/user.service';
 })
 export class HeaderComponent implements OnDestroy, OnInit {
   isLogged: Boolean;
+  sub: any;
   constructor(private userService: UserService, private router: Router) {
     this.isLogged = false;
-    userService.loggedState.subscribe((x) => {
-      if (x) {
-        this.isLogged = true;
-      } else {
+    this.sub = this.userService.loggedState.subscribe((x) => {
+      if (x === null) {
         this.isLogged = false;
+      } else {
+        this.isLogged = true;
       }
     });
   }
 
   ngOnDestroy(): void {
-    if (this.isLogged) {
-      this.userService.getLoggedIn.unsubscribe();
-    }
+  
+      this.sub.unsubscribe();
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   logout(): void {
     this.userService.logout();
   }
-
- 
 }

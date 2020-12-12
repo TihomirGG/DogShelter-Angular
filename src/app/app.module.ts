@@ -24,10 +24,10 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+   
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
     AngularFireStorageModule,
@@ -42,9 +42,11 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatPaginatorModule,
     CoreModule,
     SharedModule,
+    AppRoutingModule,
     HammerModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
+  
 })
 export class AppModule {}

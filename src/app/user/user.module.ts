@@ -17,6 +17,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { PostService } from '../core/post.service';
 import { PasswordChangeComponent } from './password-change/password-change.component';
+import { DescriptionCutPipe } from '../application-pipe/description-cut.pipe';
+import { ApplicationPipeModule } from '../application-pipe/application-pipe.module';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,7 @@ import { PasswordChangeComponent } from './password-change/password-change.compo
     MatCardModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,
+    ApplicationPipeModule
   ],
   exports: [LoginComponent, RegisterComponent],
   providers: [UserService, AuthGuard, NotAuthGuard, PostService],

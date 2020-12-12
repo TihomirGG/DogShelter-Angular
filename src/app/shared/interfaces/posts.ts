@@ -1,7 +1,7 @@
 export interface IPost {
   uid: string | undefined;
   id: string | null;
-  description: string | undefined;
+  description: string | '';
   phone: string | undefined ;
   region: string | undefined;
   city: string | undefined; 

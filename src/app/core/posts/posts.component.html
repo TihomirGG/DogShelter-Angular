@@ -19,7 +19,7 @@
         <img mat-card-md-image src="{{ post.image }}" />
       </div>
       <div class="content-container">
-        <p class="description">{{ post.description }}</p>
+        <p class="description">{{ post!.description | descriptionCut }}</p>
         <button mat-flat-button color="primary" class="view-btn">
           <a routerLink="/posts/details/{{ post.id }}">View</a>
         </button>

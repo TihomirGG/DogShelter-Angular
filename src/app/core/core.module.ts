@@ -21,6 +21,8 @@ import { EditComponent } from './edit/edit.component';
 import { AboutComponent } from './about/about.component';
 import { NotAuthGuard } from '../user/not-auth.service';
 import { AuthGuard } from '../user/auth.service';
+import { ApplicationPipeModule } from '../application-pipe/application-pipe.module';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,7 @@ import { AuthGuard } from '../user/auth.service';
     DetailComponent,
     EditComponent,
     AboutComponent,
+    NotFoundComponent
   ],
   imports: [
     CommonModule,
@@ -45,8 +48,9 @@ import { AuthGuard } from '../user/auth.service';
     MatSelectModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,
+    ApplicationPipeModule
   ],
-  exports: [HomeComponent, CreateComponent, CreateComponent, PostsComponent],
+  exports: [HomeComponent, CreateComponent, CreateComponent, PostsComponent,NotFoundComponent],
   providers: [PostService,NotAuthGuard,AuthGuard],
 })
 export class CoreModule {}

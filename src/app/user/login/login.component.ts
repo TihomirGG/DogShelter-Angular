@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
           return;
         }
         this.router.navigateByUrl('/posts/all');
-      });
+      }).catch(console.log);
   }
 
   hideError() {
